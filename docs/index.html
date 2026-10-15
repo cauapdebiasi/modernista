@@ -1,0 +1,946 @@
+<!doctype html>
+<html lang="pt-BR" data-palette="esmeralda">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#08a06a" />
+<title>Modernista</title>
+<link rel="icon" href="../assets/icons/icon-192.png" />
+<link rel="stylesheet" href="../css/modernista.css" />
+<style>
+  /* Só a moldura da documentação. Tudo dentro dos exemplos é o CSS do
+     design system, sem retoque. */
+  .doc {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 0 80px;
+  }
+  .doc-body {
+    padding: 26px 18px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 44px;
+  }
+  .doc-sec {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 0;
+  }
+  .doc-sec > h2 {
+    font: 400 30px/1.1 var(--font-display);
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .doc-sec > p.doc-lead {
+    color: var(--text-muted);
+    font-size: 15px;
+    max-width: 62ch;
+  }
+  .doc-label {
+    font: 700 11px "DM Sans", sans-serif;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .doc-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+  }
+  .doc-code {
+    font: 500 12.5px/1.5 ui-monospace, "SF Mono", Menlo, monospace;
+    background: var(--surface);
+    border: 2px solid var(--ink);
+    padding: 10px 12px;
+    overflow-x: auto;
+    white-space: pre;
+    color: var(--ink);
+  }
+  .doc-toc {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+    position: relative;
+    z-index: 1;
+  }
+  .doc-toc a {
+    font-size: 13px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border: 2px solid #fff;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.12);
+  }
+  .doc-toc a:hover {
+    background: rgba(255, 255, 255, 0.24);
+  }
+  .doc-palettes {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .doc-palette {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+    text-align: left;
+    background: var(--surface);
+    border: 3px solid var(--ink);
+    box-shadow: var(--sh-2);
+    color: var(--ink);
+  }
+  .doc-palette[aria-pressed="true"] {
+    box-shadow: 4px 4px 0 var(--mustard), var(--sh-4);
+  }
+  .doc-palette strong {
+    font: 400 19px var(--font-display);
+  }
+  .doc-palette .doc-dots {
+    display: flex;
+    gap: 4px;
+  }
+  .doc-palette .doc-dots i {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--ink);
+    border-radius: 50%;
+  }
+  .doc-swatches {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+    gap: 10px;
+  }
+  .doc-swatch {
+    border: 2px solid var(--ink);
+    background: var(--surface);
+    font-size: 12px;
+  }
+  .doc-swatch span {
+    display: block;
+    height: 44px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .doc-swatch div {
+    padding: 6px 8px;
+    display: flex;
+    flex-direction: column;
+    font-variant-numeric: tabular-nums;
+  }
+  .doc-swatch code {
+    font: 600 11.5px ui-monospace, Menlo, monospace;
+  }
+  .doc-swatch small {
+    color: var(--text-muted);
+  }
+  .doc-shadows {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+  }
+  .doc-shadows div {
+    width: 84px;
+    height: 64px;
+    border: 3px solid var(--ink);
+    background: var(--surface);
+    display: grid;
+    place-items: center;
+    font: 600 12px ui-monospace, Menlo, monospace;
+  }
+  .doc-type-display {
+    font: 400 46px/1 var(--font-display);
+    color: var(--ink);
+  }
+  .doc-slider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+  .doc-slider input {
+    flex: 1;
+    accent-color: var(--teal);
+  }
+  .doc-header-wrap .app-header {
+    padding-bottom: 66px;
+  }
+  .doc-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+  }
+  .doc-brand img {
+    width: 36px;
+    height: 36px;
+    border: 2px solid #fff;
+  }
+  .doc-brand b {
+    font: 400 22px var(--font-display);
+  }
+  .doc-footer {
+    color: var(--text-muted);
+    font-size: 13px;
+    padding: 0 18px;
+  }
+  @media (max-width: 560px) {
+    .doc-palettes {
+      grid-template-columns: 1fr;
+    }
+    .doc-type-display {
+      font-size: 38px;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="doc">
+
+  <!-- Hero: o próprio cabeçalho do design system -->
+  <div class="doc-header-wrap">
+    <header class="app-header">
+      <div class="app-header-top">
+        <div class="doc-brand">
+          <img src="../assets/icons/icon-192.png" alt="" />
+          <b>Modernista</b>
+        </div>
+        <div class="header-top-actions">
+          <button type="button" class="header-nav-btn" id="hide-btn" aria-pressed="false" aria-label="Ocultar valores">
+            <i data-lucide="eye"></i>
+          </button>
+          <button type="button" class="header-nav-btn" id="replay-hero" aria-label="Animar de novo">
+            <i data-lucide="rotate-ccw"></i>
+          </button>
+        </div>
+      </div>
+      <div class="header-figure">
+        <span class="header-figure-label">Lazer restante</span>
+        <div class="header-figure-value" id="hero-value"></div>
+        <div class="header-figure-badge">
+          <i data-lucide="calendar"></i>
+          Design system · meados do século · v0.1
+        </div>
+      </div>
+      <nav class="doc-toc" aria-label="Seções">
+        <a href="#paletas">Paletas</a>
+        <a href="#forma">Forma</a>
+        <a href="#botoes">Botões</a>
+        <a href="#numeros">Números e barras</a>
+        <a href="#recados">Recados</a>
+        <a href="#listas">Listas</a>
+        <a href="#campos">Campos</a>
+        <a href="#dialogos">Diálogos</a>
+        <a href="#sons">Sons</a>
+      </nav>
+    </header>
+  </div>
+
+  <main class="doc-body">
+
+    <!-- ============ Paletas ============ -->
+    <section class="doc-sec" id="paletas">
+      <h2>Três paletas, sorteadas a cada abertura</h2>
+      <p class="doc-lead">Cada paleta define só as cores-base. Todo o resto (primária, perigo, sombras, rampa das barras) deriva delas, então trocar <code>data-palette</code> no <code>&lt;html&gt;</code> repinta tudo. O script de início sorteia uma e nunca repete a anterior.</p>
+      <div class="doc-palettes" id="palettes"></div>
+      <span class="doc-label">Tokens da paleta atual</span>
+      <div class="doc-swatches" id="swatches"></div>
+      <span class="doc-label">Rampa das barras (estágios 1 a 4)</span>
+      <div class="doc-swatches" id="ramp"></div>
+    </section>
+
+    <!-- ============ Forma ============ -->
+    <section class="doc-sec" id="forma">
+      <h2>Contorno de tinta, sombra dura, canto reto</h2>
+      <p class="doc-lead">Bordas de 3px na cor <code>--ink</code>, sombras deslocadas sem desfoque (<code>--sh-1</code> a <code>--sh-4</code>) e raio zero. Os números e títulos usam DM Serif Display; o texto, DM Sans.</p>
+      <div class="doc-shadows">
+        <div style="box-shadow: var(--sh-1)">sh-1</div>
+        <div style="box-shadow: var(--sh-2)">sh-2</div>
+        <div style="box-shadow: var(--sh-3)">sh-3</div>
+        <div style="box-shadow: var(--sh-4)">sh-4</div>
+      </div>
+      <span class="doc-label">Tipografia</span>
+      <div class="doc-type-display">R$ 2.418,90</div>
+      <p>DM Sans no texto corrido, com números alinhados (<code>lnum</code>) e <code>tabular-nums</code> nas colunas de valores.</p>
+      <span class="doc-label">Badges: cada cor tem uma forma</span>
+      <div class="doc-row">
+        <span class="badge badge-blue"><i data-lucide="credit-card"></i></span>
+        <span class="badge badge-orange"><i data-lucide="landmark"></i></span>
+        <span class="badge badge-pink"><i data-lucide="receipt"></i></span>
+        <span class="badge badge-violet"><i data-lucide="piggy-bank"></i></span>
+        <span class="badge badge-green"><i data-lucide="target"></i></span>
+      </div>
+      <div class="doc-code">blue = quadrado · orange = círculo · pink = arco · violet = quadrado · green = folha</div>
+    </section>
+
+    <!-- ============ Botões ============ -->
+    <section class="doc-sec" id="botoes">
+      <h2>Botões que afundam a sombra</h2>
+      <p class="doc-lead">Ao apertar, o botão desce 3px e a sombra some, como uma tecla. Os fantasmas e links só encolhem um pouco.</p>
+      <button type="button" class="btn-primary"><i data-lucide="plus"></i>Novo modelo de custo fixo</button>
+      <div class="sheet-actions">
+        <button type="button" class="btn-ghost btn-fixed">Cancelar</button>
+        <button type="button" class="btn-primary-lg">Lançar gasto</button>
+      </div>
+      <div class="doc-row">
+        <button type="button" class="btn-danger">Excluir</button>
+        <button type="button" class="btn-outline">Contorno</button>
+        <button type="button" class="btn-ghost">Fantasma</button>
+      </div>
+      <div class="doc-row">
+        <button type="button" class="fab" aria-label="Novo gasto"><i data-lucide="plus"></i></button>
+        <button type="button" class="icon-btn-ghost" aria-label="Detalhes"><i data-lucide="info"></i></button>
+        <button type="button" class="link-btn">Lançar todos agora</button>
+        <button type="button" class="btn-primary-lg" disabled>Desabilitado</button>
+        <button type="button" class="btn-primary-lg"><span class="spinner" aria-hidden="true"></span>Salvando</button>
+      </div>
+    </section>
+
+    <!-- ============ Números e barras ============ -->
+    <section class="doc-sec" id="numeros">
+      <h2>Números que rolam, barras que enchem</h2>
+      <p class="doc-lead">Cada dígito gira como um odômetro e todos param juntos em 3s, na curva <code>cubic-bezier(0.16, 1, 0.3, 1)</code>. As barras enchem no mesmo tempo. Valor negativo rola pra baixo, com a escadinha do som descendo.</p>
+      <div class="tab-panel">
+        <div class="two-col">
+          <div class="stat-mini">
+            <div class="stat-mini-head">
+              <i data-lucide="trending-up" class="tone-info"></i>
+              <span>Receita</span>
+              <button type="button" class="icon-btn-ghost stat-mini-info" data-explain aria-label="De onde vem a receita"><i data-lucide="info"></i></button>
+            </div>
+            <div class="stat-mini-value"><span class="money-mask" id="stat-receita"></span></div>
+          </div>
+          <div class="stat-mini">
+            <div class="stat-mini-head">
+              <i data-lucide="trending-down" class="tone-danger"></i>
+              <span>Gasto</span>
+              <button type="button" class="icon-btn-ghost stat-mini-info" data-explain aria-label="O que entra no gasto"><i data-lucide="info"></i></button>
+            </div>
+            <div class="stat-mini-value"><span class="money-mask" id="stat-gasto"></span></div>
+          </div>
+        </div>
+
+        <div class="doc-row">
+          <button type="button" class="btn-ghost" id="roll-up"><i data-lucide="arrow-up"></i>Rolar positivo</button>
+          <button type="button" class="btn-ghost" id="roll-down"><i data-lucide="arrow-down"></i>Rolar negativo</button>
+        </div>
+
+        <div class="gauge-card">
+          <div class="gauge-head">
+            <span class="badge badge-blue"><i data-lucide="credit-card"></i></span>
+            <div class="gauge-head-text">
+              <div class="gauge-name">Teto da fatura</div>
+              <div class="gauge-sub">Muda de cor pela rampa conforme enche</div>
+            </div>
+            <button type="button" class="icon-btn-ghost" data-explain aria-label="Como é calculado"><i data-lucide="info"></i></button>
+          </div>
+          <div class="gauge-track" id="gauge-track"></div>
+          <div class="gauge-values">
+            <span class="money-mask" id="gauge-spent"></span>
+            <span class="muted money-mask">R$ 3.000,00</span>
+          </div>
+          <div class="gauge-cards">
+            <div class="gauge-card-row">
+              <div class="gauge-card-top">
+                <span role="img" aria-label="Nubank" class="card-icon card-icon-nubank" style="width:22px;height:22px;border-radius:50%"><i></i></span>
+                <span>Nubank</span>
+                <span class="gauge-card-value money-mask" id="nu-value"></span>
+              </div>
+              <div class="gauge-mini" id="nu-track"></div>
+            </div>
+            <div class="gauge-card-row">
+              <div class="gauge-card-top">
+                <span role="img" aria-label="Mercado Pago" class="card-icon card-icon-mercadopago" style="width:22px;height:22px;border-radius:50%"><i></i></span>
+                <span>Mercado Pago</span>
+                <span class="gauge-card-value money-mask" id="mp-value"></span>
+              </div>
+              <div class="gauge-mini" id="mp-track"></div>
+            </div>
+          </div>
+          <div class="gauge-status" id="gauge-status"></div>
+        </div>
+        <label class="doc-slider">
+          Uso
+          <input type="range" min="0" max="120" value="52" id="gauge-pct" />
+          <output id="gauge-pct-out">52%</output>
+        </label>
+      </div>
+    </section>
+
+    <!-- ============ Recados ============ -->
+    <section class="doc-sec" id="recados">
+      <h2>Cartões de recado</h2>
+      <p class="doc-lead">O <code>ToneCard</code> troca a cor da sombra, do círculo e do sobretítulo por tom. No app ele mostra a dica do mês; sem conteúdo vira esqueleto.</p>
+      <div class="tab-panel">
+        <div class="insight" data-tone="dica"><span class="insight-badge"><i data-lucide="lightbulb"></i></span><div class="insight-body"><span class="insight-eyebrow">Dica</span><p class="insight-text">Mercado caiu 18% em relação ao mês passado. Dá pra repetir a lista curta.</p></div></div>
+        <div class="insight" data-tone="elogio"><span class="insight-badge"><i data-lucide="party-popper"></i></span><div class="insight-body"><span class="insight-eyebrow">Mandou bem</span><p class="insight-text">Faltando 9 dias, ainda sobra 41% do lazer.</p></div></div>
+        <div class="insight" data-tone="sugestao"><span class="insight-badge"><i data-lucide="sparkles"></i></span><div class="insight-body"><span class="insight-eyebrow">Sugestão</span><p class="insight-text">Três assinaturas somam R$ 96 por mês. Vale revisar alguma?</p></div></div>
+        <div class="insight" data-tone="alerta"><span class="insight-badge"><i data-lucide="triangle-alert"></i></span><div class="insight-body"><span class="insight-eyebrow">Olho nisso</span><p class="insight-text">Delivery já passou de R$ 300 neste ciclo.</p></div></div>
+        <div class="insight" data-tone="curiosidade"><span class="insight-badge"><i data-lucide="eye"></i></span><div class="insight-body"><span class="insight-eyebrow">Curiosidade</span><p class="insight-text">Sexta é o dia com mais lançamentos.</p></div></div>
+        <div class="insight skeleton" aria-hidden="true"><span class="insight-badge"></span><div class="insight-body"><span class="sk-line short"></span><span class="sk-line"></span></div></div>
+      </div>
+    </section>
+
+    <!-- ============ Listas ============ -->
+    <section class="doc-sec" id="listas">
+      <h2>Listas</h2>
+      <p class="doc-lead">Toque e segure (ou clique com o botão direito) num lançamento: o menu de ações cresce a partir do dedo e nunca vaza da tela.</p>
+      <div class="tab-panel">
+        <div class="search-row">
+          <div class="search-box"><i data-lucide="search"></i><input placeholder="Buscar lançamento…" aria-label="Buscar lançamento" /></div>
+          <button type="button" class="fab" aria-label="Novo gasto" data-open="sheet"><i data-lucide="plus"></i></button>
+        </div>
+        <div class="filter-row" id="filters">
+          <button type="button" class="filter-pill active" aria-pressed="true">Tudo <span class="filter-count">4</span></button>
+          <button type="button" class="filter-pill" aria-pressed="false">Cartão <span class="filter-count">2</span></button>
+          <button type="button" class="filter-pill" aria-pressed="false">Conta <span class="filter-count">1</span></button>
+          <button type="button" class="filter-pill" aria-pressed="false">Reserva <span class="filter-count">1</span></button>
+        </div>
+        <div class="expense-cards">
+          <div class="expense-card" data-press>
+            <span class="badge badge-orange"><i data-lucide="shopping-cart"></i></span>
+            <div class="expense-card-main">
+              <span class="expense-card-desc">Mercado do mês</span>
+              <span class="expense-card-meta"><span class="source-tag tone-cartao with-card"><span class="card-icon card-icon-nubank" style="width:14px;height:14px;border-radius:50%"><i></i></span>Cartão</span>12 out</span>
+            </div>
+            <span class="expense-card-value"><span class="money-mask">R$ 486,20</span></span>
+          </div>
+          <div class="expense-card" data-press>
+            <span class="badge badge-pink"><i data-lucide="utensils"></i></span>
+            <div class="expense-card-main">
+              <span class="expense-card-desc">Pizza de sexta</span>
+              <span class="expense-card-meta"><span class="source-tag tone-conta">Conta</span>10 out</span>
+            </div>
+            <span class="expense-card-value"><span class="money-mask">R$ 74,90</span></span>
+          </div>
+          <div class="expense-card" data-press>
+            <span class="badge badge-violet"><i data-lucide="car"></i></span>
+            <div class="expense-card-main">
+              <span class="expense-card-desc">Pneu do carro</span>
+              <span class="expense-card-meta"><span class="source-tag tone-reserva">Reserva</span>08 out</span>
+            </div>
+            <span class="expense-card-value"><span class="money-mask">R$ 620,00</span></span>
+          </div>
+          <div class="expense-card fixed-card" data-press>
+            <span class="badge badge-blue"><i data-lucide="wifi"></i></span>
+            <div class="expense-card-main">
+              <span class="expense-card-desc">Internet</span>
+              <span class="expense-card-meta"><span class="source-tag tone-cartao with-card"><span class="card-icon card-icon-mercadopago" style="width:14px;height:14px;border-radius:50%"><i></i></span>Cartão</span>repete nos próximos ciclos</span>
+            </div>
+            <span class="expense-card-value"><span class="money-mask">R$ 119,90</span></span>
+            <label class="switch" title="Ativo nos próximos ciclos"><input type="checkbox" checked aria-label="Ativo nos próximos ciclos" /><span class="switch-track" aria-hidden="true"><span class="switch-thumb"></span></span></label>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-head"><h2>Resumo do ciclo</h2><span class="section-note">tudo em BRL</span></div>
+          <ul class="row-list">
+            <li class="row-item"><span class="badge badge-blue"><i data-lucide="arrow-down-to-line"></i></span><span class="row-label">Aporte do ciclo</span><span class="row-value"><span class="money-mask">R$ 1.000,00</span></span></li>
+            <li class="row-item"><span class="badge badge-orange"><i data-lucide="landmark"></i></span><span class="row-label">Custos fixos fora do cartão</span><span class="row-value"><span class="money-mask">R$ 1.250,00</span></span></li>
+            <li class="row-item"><span class="badge badge-pink"><i data-lucide="receipt"></i></span><span class="row-label">Fatura anterior a pagar</span><span class="row-value"><span class="money-mask">R$ 1.893,47</span></span></li>
+            <li class="row-item"><span class="badge badge-green"><i data-lucide="target"></i></span><span class="row-label">Reserva sugerida</span><span class="row-value"><span class="money-mask">R$ 11.250,00</span></span></li>
+          </ul>
+        </div>
+
+        <div class="empty-state">
+          <span class="empty-icon"><i data-lucide="inbox"></i></span>
+          <span class="empty-title">Nada por aqui</span>
+          <p class="empty-body">Nenhum lançamento com esses filtros. Limpe a busca ou lance um gasto novo.</p>
+          <button type="button" class="btn-ghost">Limpar filtros</button>
+        </div>
+
+        <div class="info-callout"><i data-lucide="info"></i><p>1 modelo ativo não entrou neste ciclo. <button type="button" class="link-btn">Lançar ele agora</button></p></div>
+        <div class="preview-note" role="note"><i data-lucide="eye"></i><p><b>Prévia do próximo ciclo.</b> Nada daqui é salvo.</p></div>
+        <p class="hint"><b>Conta</b> é Pix, débito ou saldo: desconta do lazer e não entra na fatura.</p>
+      </div>
+    </section>
+
+    <!-- ============ Campos ============ -->
+    <section class="doc-sec" id="campos">
+      <h2>Campos</h2>
+      <p class="doc-lead">O dinheiro entra pela casa dos centavos, como numa maquininha. O campo com salvamento automático mostra um check ao sair dele.</p>
+      <div class="tab-panel">
+        <input class="text-field" placeholder="Descrição (ex: Mercado do mês)" aria-label="Descrição" />
+        <div class="doc-row">
+          <div class="money-box money-box-sm"><span class="money-prefix">R$</span><input data-money inputmode="decimal" placeholder="0,00" aria-label="Valor pequeno" /></div>
+          <div class="money-box money-box-md"><span class="money-prefix">R$</span><input data-money inputmode="decimal" placeholder="0,00" aria-label="Valor médio" /></div>
+        </div>
+        <div class="money-box money-box-lg"><span class="money-prefix">R$</span><input data-money inputmode="decimal" placeholder="0,00" aria-label="Valor grande" /></div>
+
+        <div class="section">
+          <h2>Receita do mês</h2>
+          <p class="section-desc">Salva sozinho quando você sai do campo.</p>
+          <div class="reserva-row">
+            <div class="field-group">
+              <label class="field-label" for="auto1">Emprego principal</label>
+              <div class="money-box money-box-md" data-autosave><span class="money-prefix">R$</span><input id="auto1" data-money inputmode="decimal" value="4.500,00" /></div>
+              <span class="field-hint">Líquido que cai na conta</span>
+            </div>
+            <div class="field-group">
+              <span class="field-label">Reserva sugerida</span>
+              <div class="money-box money-box-md readonly" aria-readonly="true"><span class="money-prefix">R$</span><span class="money-readonly-value"><span class="money-mask">11.250,00</span></span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="segmented" id="segmented">
+          <button type="button" class="segmented-btn tone-cartao active" aria-pressed="true"><i data-lucide="credit-card"></i>Cartão</button>
+          <button type="button" class="segmented-btn tone-conta" aria-pressed="false"><i data-lucide="banknote"></i>Conta</button>
+          <button type="button" class="segmented-btn tone-reserva" aria-pressed="false"><i data-lucide="piggy-bank"></i>Reserva</button>
+          <button type="button" class="segmented-btn tone-adiantamento" aria-pressed="false"><i data-lucide="hand-coins"></i>Adiantar</button>
+        </div>
+
+        <div class="scope" role="group" aria-label="Aplicar em">
+          <span class="field-label">Aplicar em</span>
+          <div class="scope-seg" id="scope">
+            <button type="button" aria-pressed="true">Só este ciclo</button>
+            <button type="button" aria-pressed="false">Este e os próximos</button>
+          </div>
+          <span class="field-hint">A mudança vale só neste ciclo.</span>
+        </div>
+
+        <div class="toggle-row" id="toggle-row">
+          <span>Entra na fatura do cartão</span>
+          <label class="switch" title="Entra na fatura"><input type="checkbox" checked aria-label="Entra na fatura" /><span class="switch-track" aria-hidden="true"><span class="switch-thumb"></span></span></label>
+        </div>
+
+        <div class="field-group">
+          <span class="field-label">Em qual cartão?</span>
+          <div class="card-picker" role="group" aria-label="Cartão" id="card-picker">
+            <button type="button" class="card-tile active" aria-pressed="true"><span class="card-icon card-icon-nubank" style="width:40px;height:40px;border-radius:50%"><i></i></span><span>Nubank</span></button>
+            <button type="button" class="card-tile" aria-pressed="false"><span class="card-icon card-icon-mercadopago" style="width:40px;height:40px;border-radius:50%"><i></i></span><span>Mercado Pago</span></button>
+          </div>
+        </div>
+
+        <div class="section no-pad">
+          <div class="settings-row">
+            <span class="badge badge-blue"><i data-lucide="volume-2"></i></span>
+            <span class="settings-row-grow">Sons do app</span>
+            <label class="switch" title="Sons"><input type="checkbox" id="sound-toggle" checked aria-label="Sons do app" /><span class="switch-track" aria-hidden="true"><span class="switch-thumb"></span></span></label>
+          </div>
+        </div>
+        <div class="section no-pad">
+          <button type="button" class="settings-row danger" data-open="confirm"><span class="badge badge-pink"><i data-lucide="log-out"></i></span>Sair da conta</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Diálogos ============ -->
+    <section class="doc-sec" id="dialogos">
+      <h2>Diálogos que entram e saem</h2>
+      <p class="doc-lead">Todos têm animação de saída: o componente fica montado por 260ms com a classe <code>.closing</code> (hook <code>usePresence</code>). O seletor de meses desliza o ano pro lado da seta.</p>
+      <div class="doc-row">
+        <button type="button" class="btn-primary" data-open="sheet"><i data-lucide="panel-bottom-open"></i>Folha</button>
+        <button type="button" class="btn-primary" data-open="confirm"><i data-lucide="triangle-alert"></i>Confirmação</button>
+        <button type="button" class="btn-primary" data-open="explain"><i data-lucide="info"></i>Explicação</button>
+        <button type="button" class="btn-primary" data-open="months"><i data-lucide="calendar"></i>Meses</button>
+      </div>
+    </section>
+
+    <!-- ============ Sons ============ -->
+    <section class="doc-sec" id="sons">
+      <h2>Sons sintetizados</h2>
+      <p class="doc-lead">Nada de arquivo de áudio: tudo é Web Audio. Um som por ação, mais a escadinha pentatônica da contagem. Todo botão faz o "gota" de clique.</p>
+      <div class="doc-row">
+        <button type="button" class="btn-ghost" data-sound="success" data-no-sound><i data-lucide="circle-check"></i>Sucesso</button>
+        <button type="button" class="btn-ghost" data-sound="error" data-no-sound><i data-lucide="circle-x"></i>Erro</button>
+        <button type="button" class="btn-ghost" data-sound="warning" data-no-sound><i data-lucide="triangle-alert"></i>Aviso</button>
+        <button type="button" class="btn-ghost" data-sound="click" data-no-sound><i data-lucide="mouse-pointer-click"></i>Clique</button>
+        <button type="button" class="btn-ghost" data-count="up" data-no-sound><i data-lucide="trending-up"></i>Contagem subindo</button>
+        <button type="button" class="btn-ghost" data-count="down" data-no-sound><i data-lucide="trending-down"></i>Contagem descendo</button>
+      </div>
+    </section>
+  </main>
+
+  <p class="doc-footer">Modernista é extraído do Planejador Financeiro. Os componentes React estão em <code>src/</code>; esta página usa o mesmo CSS com um pouco de JavaScript puro pra animar.</p>
+</div>
+
+<div id="layer"></div>
+
+<script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+<script>
+(function () {
+  "use strict";
+  const icons = () => window.lucide && window.lucide.createIcons();
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+  const brl = (n) => n.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }).replace(/ /g, " ");
+
+  /* ---------- Sons (port de src/sound/sounds.ts) ---------- */
+  let ctx = null, master = null, soundOn = true;
+  function audio() {
+    if (!ctx) {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return null;
+      ctx = new AC();
+      master = ctx.createGain();
+      master.gain.value = 0.29;
+      master.connect(ctx.destination);
+    }
+    if (ctx.state === "suspended") ctx.resume();
+    return ctx;
+  }
+  function tone(c, o) {
+    const start = c.currentTime + (o.t || 0);
+    const osc = c.createOscillator(), gain = c.createGain();
+    osc.type = o.type || "sine";
+    osc.frequency.setValueAtTime(o.f, start);
+    if (o.f2) osc.frequency.exponentialRampToValueAtTime(o.f2, start + o.d);
+    gain.gain.setValueAtTime(0.0001, start);
+    gain.gain.exponentialRampToValueAtTime(o.g, start + 0.006);
+    gain.gain.exponentialRampToValueAtTime(0.0001, start + o.d);
+    osc.connect(gain); gain.connect(master);
+    osc.start(start); osc.stop(start + o.d + 0.03);
+  }
+  const SOUNDS = {
+    success: [{ f: 784, d: 0.1, g: 0.5 }, { f: 1047, t: 0.1, d: 0.24, g: 0.5 }],
+    error: [{ type: "square", f: 196, d: 0.09, g: 0.2 }, { type: "square", f: 196, t: 0.13, d: 0.15, g: 0.2 }],
+    warning: [{ type: "triangle", f: 880, d: 0.12, g: 0.55 }, { type: "triangle", f: 659, t: 0.12, d: 0.22, g: 0.55 }],
+    click: [{ f: 900, f2: 500, d: 0.05, g: 0.5 }],
+  };
+  function playSound(kind) {
+    if (!soundOn) return;
+    const c = audio(); if (!c) return;
+    SOUNDS[kind].forEach((t) => tone(c, t));
+  }
+  const COUNT_NOTES = [196, 220, 247, 294, 330, 392, 440, 494, 587, 659, 784];
+  function softNote(c, f, t, d, g, type) {
+    const start = c.currentTime + t;
+    const osc = c.createOscillator(), lp = c.createBiquadFilter(), gain = c.createGain();
+    osc.type = type || "triangle"; osc.frequency.value = f;
+    lp.type = "lowpass"; lp.frequency.value = 2400;
+    gain.gain.setValueAtTime(0.0001, start);
+    gain.gain.exponentialRampToValueAtTime(g, start + 0.025);
+    gain.gain.exponentialRampToValueAtTime(0.0001, start + d);
+    osc.connect(lp); lp.connect(gain); gain.connect(master);
+    osc.start(start); osc.stop(start + d + 0.03);
+  }
+  function playCountSound(dir) {
+    if (!soundOn) return;
+    const c = audio(); if (!c) return;
+    const notes = dir === "up" ? COUNT_NOTES : COUNT_NOTES.slice().reverse();
+    const n = notes.length; let t = 0;
+    notes.forEach((f, i) => { softNote(c, f, t, 0.22, 0.15); t += 0.06 + 0.05 * Math.pow(i / (n - 1), 1.6); });
+    const end = notes[n - 1];
+    softNote(c, end, t - 0.02, 0.35, 0.08, "sine");
+    softNote(c, dir === "up" ? end / 2 : end * 2, t - 0.02, 0.42, 0.09, "sine");
+  }
+  // SoundEffects: clique em qualquer controle
+  const CLICKABLE = 'button, a[href], [role="menuitem"], [role="tab"], input[type="checkbox"]';
+  document.addEventListener("click", (e) => {
+    const el = e.target.closest && e.target.closest(CLICKABLE);
+    if (!el || el.matches(":disabled, [aria-disabled='true'], [data-no-sound]")) return;
+    playSound("click");
+  }, true);
+  $$("[data-sound]").forEach((b) => b.addEventListener("click", () => playSound(b.dataset.sound)));
+  $$("[data-count]").forEach((b) => b.addEventListener("click", () => playCountSound(b.dataset.count)));
+  $("#sound-toggle").addEventListener("change", (e) => { soundOn = e.target.checked; if (soundOn) playSound("click"); });
+
+  /* ---------- Odômetro (port de JackpotNumber) ---------- */
+  const TOTAL = 3000, EASE = "cubic-bezier(0.16, 1, 0.3, 1)";
+  function jackpot(el, value, dir) {
+    dir = dir || "up";
+    el.innerHTML = "";
+    const wrap = document.createElement("span");
+    wrap.className = "jackpot-number" + (dir === "down" ? " down" : "");
+    wrap.setAttribute("aria-label", value);
+    let idx = 0;
+    for (const ch of value) {
+      if (!/[0-9]/.test(ch)) {
+        const s = document.createElement("span"); s.setAttribute("aria-hidden", "true"); s.textContent = ch; wrap.appendChild(s); continue;
+      }
+      const target = +ch, delay = idx++ * 100, dur = Math.max(TOTAL - delay, 400);
+      const len = 2 * 10 + target + 1;
+      const strip = Array.from({ length: len }, (_, i) => (dir === "up" ? i % 10 : (target + i) % 10));
+      const d = document.createElement("span");
+      d.className = "jackpot-digit"; d.setAttribute("aria-hidden", "true");
+      d.style.setProperty("--jp-delay", delay + "ms");
+      d.style.setProperty("--jp-duration", dur + "ms");
+      d.style.setProperty("--jp-distance", "-" + (len - 1) + "em");
+      d.style.setProperty("--jp-ease", EASE);
+      const st = document.createElement("span"); st.className = "jackpot-strip";
+      strip.forEach((n) => { const c = document.createElement("span"); c.className = "jackpot-cell"; c.textContent = n; st.appendChild(c); });
+      d.appendChild(st); wrap.appendChild(d);
+    }
+    el.appendChild(wrap);
+  }
+
+  /* ---------- Barra que enche (port de ProgressFill) ---------- */
+  function fill(track, cls, pct) {
+    track.innerHTML = "";
+    const f = document.createElement("div");
+    f.className = cls + " fill-anim";
+    f.style.width = pct + "%";
+    f.style.setProperty("--fill-dur", TOTAL + "ms");
+    f.style.setProperty("--fill-ease", EASE);
+    track.appendChild(f);
+  }
+  const rampStage = (pct, over) => (over || pct >= 85 ? 4 : pct >= 65 ? 3 : pct >= 40 ? 2 : 1);
+
+  function hero(dir) {
+    const v = dir === "down" ? -312.4 : 1286.35;
+    const el = $("#hero-value");
+    el.classList.toggle("negative", v < 0);
+    jackpot(el, brl(v), dir);
+    playCountSound(dir);
+    jackpot($("#stat-receita"), brl(dir === "down" ? 4500 : 5850), "up");
+    jackpot($("#stat-gasto"), brl(dir === "down" ? 5312.4 : 3563.65), "up");
+  }
+  $("#replay-hero").addEventListener("click", () => hero("up"));
+  $("#roll-up").addEventListener("click", () => hero("up"));
+  $("#roll-down").addEventListener("click", () => hero("down"));
+
+  const LIMIT = 3000;
+  function gauge(pct, animate) {
+    const over = pct > 100, shown = Math.min(pct, 100);
+    const spent = (LIMIT * pct) / 100;
+    $("#gauge-pct-out").textContent = pct + "%";
+    $("#gauge-spent").textContent = brl(spent);
+    $("#nu-value").textContent = brl(spent * 0.62);
+    $("#mp-value").textContent = brl(spent * 0.38);
+    const cls = "gauge-fill stage-" + rampStage(shown, over);
+    if (animate) {
+      fill($("#gauge-track"), cls, shown);
+      fill($("#nu-track"), "gauge-mini-fill card-nubank", shown * 0.62);
+      fill($("#mp-track"), "gauge-mini-fill card-mercadopago", shown * 0.38);
+    } else {
+      $("#gauge-track").firstChild.className = cls;
+      $("#gauge-track").firstChild.style.width = shown + "%";
+      $("#nu-track").firstChild.style.width = shown * 0.62 + "%";
+      $("#mp-track").firstChild.style.width = shown * 0.38 + "%";
+    }
+    const st = $("#gauge-status");
+    st.classList.toggle("over", over);
+    st.innerHTML = (over ? '<i data-lucide="triangle-alert"></i>Estourou ' : '<i data-lucide="circle-check"></i>Sobram ') +
+      '<span class="money-mask">' + brl(Math.abs(LIMIT - spent)) + "</span>" + (over ? " da fatura" : " na fatura");
+    icons();
+  }
+  const slider = $("#gauge-pct");
+  slider.addEventListener("input", () => gauge(+slider.value, false));
+  slider.addEventListener("change", () => gauge(+slider.value, true));
+
+  /* ---------- Paletas ---------- */
+  const PALETTES = { esmeralda: "#08a06a", oceano: "#1f6bff", turquesa: "#0aa6a0" };
+  const BASE = ["--ink", "--teal", "--teal-deep", "--mustard", "--mustard-soft", "--mustard-wash", "--tomato", "--tomato-deep", "--plum", "--plum-soft", "--bg", "--bg-subtle", "--surface", "--sand", "--text-muted", "--primary-soft", "--danger-soft", "--amber-deep"];
+  const RAMP = ["--ramp-1", "--ramp-2", "--ramp-3", "--ramp-4"];
+  function swatches(box, names) {
+    const cs = getComputedStyle(document.documentElement);
+    box.innerHTML = names.map((n) => {
+      const v = cs.getPropertyValue(n).trim();
+      return '<div class="doc-swatch"><span style="background:var(' + n + ')"></span><div><code>' + n + "</code><small>" + v + "</small></div></div>";
+    }).join("");
+  }
+  function setPalette(p) {
+    document.documentElement.setAttribute("data-palette", p);
+    $('meta[name="theme-color"]').setAttribute("content", PALETTES[p]);
+    $$(".doc-palette").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.p === p)));
+    swatches($("#swatches"), BASE);
+    swatches($("#ramp"), RAMP);
+    try { localStorage.setItem("modernista:palette", p); } catch (e) {}
+  }
+  // Bolinhas fixas por paleta (os tokens só valem no <html>, não num botão).
+  const DOTS = {
+    esmeralda: ["#08a06a", "#ffc93c", "#ff5a4e", "#3a2fd6", "#e6f6ee"],
+    oceano: ["#1f6bff", "#ffc53d", "#ff4d73", "#0ba89b", "#e7efff"],
+    turquesa: ["#0aa6a0", "#ff9f1c", "#ee3f8a", "#2b59ff", "#e3f6f4"],
+  };
+  $("#palettes").innerHTML = Object.keys(PALETTES).map((p) =>
+    '<button type="button" class="doc-palette" data-p="' + p + '" aria-pressed="false"><strong>' +
+    p[0].toUpperCase() + p.slice(1) + '</strong><span class="doc-dots">' +
+    DOTS[p].map((c) => '<i style="background:' + c + '"></i>').join("") + "</span></button>"
+  ).join("");
+  $$(".doc-palette").forEach((b) => b.addEventListener("click", () => setPalette(b.dataset.p)));
+
+  /* ---------- Ocultar valores ---------- */
+  $("#hide-btn").addEventListener("click", (e) => {
+    const on = document.documentElement.getAttribute("data-hide-money") !== "1";
+    if (on) document.documentElement.setAttribute("data-hide-money", "1");
+    else document.documentElement.removeAttribute("data-hide-money");
+    $$(".money-mask.revealed").forEach((m) => m.classList.remove("revealed"));
+    const b = e.currentTarget;
+    b.setAttribute("aria-pressed", String(on));
+    b.innerHTML = '<i data-lucide="' + (on ? "eye-off" : "eye") + '"></i>';
+    icons();
+  });
+  document.addEventListener("click", (e) => {
+    const m = e.target.closest && e.target.closest(".money-mask");
+    if (m && document.documentElement.getAttribute("data-hide-money") === "1") m.classList.add("revealed");
+  });
+
+  /* ---------- Campos ---------- */
+  $$("[data-money]").forEach((inp) => {
+    inp.addEventListener("input", () => {
+      const digits = inp.value.replace(/\D/g, "").slice(0, 9);
+      inp.value = digits ? (parseInt(digits, 10) / 100).toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : "";
+      const box = inp.closest("[data-autosave]"); if (box) { box.classList.remove("field-saved"); const ck = box.querySelector(".field-check"); if (ck) ck.remove(); }
+    });
+  });
+  $$("[data-autosave] input").forEach((inp) => {
+    let t;
+    inp.addEventListener("blur", () => {
+      const box = inp.closest("[data-autosave]");
+      box.classList.add("field-saved");
+      if (!box.querySelector(".field-check")) { box.insertAdjacentHTML("beforeend", '<i data-lucide="circle-check" class="field-check"></i>'); icons(); }
+      clearTimeout(t);
+      t = setTimeout(() => { box.classList.remove("field-saved"); const ck = box.querySelector(".field-check"); if (ck) ck.remove(); }, 1800);
+    });
+  });
+  function single(group, sel, activeClass) {
+    $$(sel, group).forEach((b) => b.addEventListener("click", () => {
+      $$(sel, group).forEach((x) => { x.setAttribute("aria-pressed", String(x === b)); if (activeClass) x.classList.toggle(activeClass, x === b); });
+    }));
+  }
+  single($("#filters"), ".filter-pill", "active");
+  single($("#segmented"), ".segmented-btn", "active");
+  single($("#scope"), "button");
+  single($("#card-picker"), ".card-tile", "active");
+  $("#toggle-row").addEventListener("click", (e) => {
+    if (e.target.closest(".switch")) return;
+    const cb = $("#toggle-row input"); cb.checked = !cb.checked;
+  });
+
+  /* ---------- Diálogos (usePresence: .closing por 260ms) ---------- */
+  const layer = $("#layer");
+  function mount(html, onReady) {
+    const root = document.createElement("div");
+    root.innerHTML = html;
+    layer.appendChild(root);
+    icons();
+    const close = () => {
+      if (root.dataset.closing) return;
+      root.dataset.closing = "1";
+      $$(".overlay, .sheet, .confirm-dialog, .explain-sheet", root).forEach((el) => el.classList.add("closing"));
+      setTimeout(() => root.remove(), 260);
+    };
+    $$("[data-close]", root).forEach((b) => b.addEventListener("click", close));
+    const ov = $(".overlay", root); if (ov) ov.addEventListener("click", close);
+    if (onReady) onReady(root, close);
+    return close;
+  }
+  const DIALOGS = {
+    sheet: () => mount(
+      '<div class="overlay"></div><div role="dialog" aria-modal="true" aria-label="Novo lançamento" class="sheet"><div class="sheet-handle"></div><div class="sheet-content">' +
+      '<h3 class="sheet-title">Novo lançamento</h3>' +
+      '<input class="text-field" placeholder="Descrição (ex: Mercado do mês)" aria-label="Descrição" />' +
+      '<div class="money-box money-box-lg"><span class="money-prefix">R$</span><input inputmode="decimal" placeholder="0,00" aria-label="Valor" /></div>' +
+      '<p class="hint">Entra na fatura e consome o teto do ciclo.</p>' +
+      '<div class="sheet-actions"><button type="button" class="btn-ghost btn-fixed" data-close>Cancelar</button><button type="button" class="btn-primary-lg" data-close data-ok>Lançar gasto</button></div>' +
+      "</div></div>",
+      (root) => { const ok = $("[data-ok]", root); ok.addEventListener("click", () => playSound("success")); }
+    ),
+    confirm: () => {
+      playSound("warning");
+      mount(
+        '<div class="overlay"></div><div role="alertdialog" aria-modal="true" class="confirm-dialog"><span class="confirm-icon-wrap"><i data-lucide="triangle-alert"></i></span>' +
+        '<h3 class="confirm-title">Excluir lançamento?</h3><p class="confirm-body">Mercado do mês sai do ciclo e o lazer volta a contar com esse valor.</p>' +
+        '<div class="confirm-actions"><button type="button" class="btn-ghost" data-close>Manter</button><button type="button" class="btn-danger" data-close data-err>Excluir</button></div></div>',
+        (root) => $("[data-err]", root).addEventListener("click", () => playSound("error"))
+      );
+    },
+    explain: () => mount(
+      '<div class="overlay"></div><div role="dialog" aria-modal="true" class="explain-sheet"><h3 class="sheet-title">Como o lazer do mês é calculado</h3><div class="explain-rows">' +
+      '<div class="explain-row"><span>Teto da fatura</span><span>R$ 3.000,00</span></div>' +
+      '<div class="explain-row"><span>− Custos fixos no cartão</span><span>R$ 420,00</span></div>' +
+      '<div class="explain-row"><span>= Lazer do mês</span><span>R$ 2.580,00</span></div>' +
+      '<div class="explain-row"><span>− Gasto no cartão + conta</span><span>R$ 1.293,65</span></div>' +
+      '<div class="explain-row emphasis"><span>= Lazer restante</span><span>R$ 1.286,35</span></div>' +
+      '</div><button type="button" class="btn-primary-lg btn-full" data-close>Entendi</button></div>'
+    ),
+    months: () => monthPicker(),
+  };
+  $$("[data-open]").forEach((b) => b.addEventListener("click", () => DIALOGS[b.dataset.open]()));
+  $$("[data-explain]").forEach((b) => b.addEventListener("click", () => DIALOGS.explain()));
+
+  /* ---------- Seletor de meses ---------- */
+  const MONTHS = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"];
+  function monthPicker() {
+    const value = "2026-10", enabled = new Set(["2026-06", "2026-07", "2026-08", "2026-09", "2026-10"]), preview = "2026-11";
+    let year = 2026, dir = 1;
+    const root = document.createElement("div");
+    layer.appendChild(root);
+    function finish() {
+      $(".mp-backdrop", root).classList.add("leaving");
+      $(".mp-panel", root).classList.add("leaving");
+      setTimeout(() => root.remove(), 180);
+    }
+    function render() {
+      root.innerHTML =
+        '<div class="mp-backdrop"><div role="dialog" aria-modal="true" aria-label="Escolher mês" class="mp-panel">' +
+        '<div class="mp-head"><button type="button" class="mp-arrow" data-y="-1" aria-label="Ano anterior"><i data-lucide="chevron-left"></i></button>' +
+        '<span class="mp-year" style="--dx:' + dir * 22 + 'px" aria-live="polite">' + year + "</span>" +
+        '<button type="button" class="mp-arrow" data-y="1" aria-label="Próximo ano"><i data-lucide="chevron-right"></i></button></div>' +
+        '<div class="mp-grid" style="--dx:' + dir * 24 + 'px">' +
+        MONTHS.map((n, i) => {
+          const l = year + "-" + String(i + 1).padStart(2, "0");
+          const viewing = l === value, isPrev = !enabled.has(l) && l === preview, ok = enabled.has(l) || isPrev || viewing;
+          return '<button type="button" data-l="' + l + '" ' + (ok ? "" : "disabled ") + (viewing ? 'aria-current="date" ' : "") +
+            'style="--i:' + i + '" class="mp-month ' + (viewing ? "viewing " : "") + (isPrev ? "next" : "") + '">' + n +
+            (isPrev ? '<span class="mp-month-new">prévia</span>' : "") + "</button>";
+        }).join("") + "</div></div></div>";
+      icons();
+      $(".mp-backdrop", root).addEventListener("click", (e) => { if (e.target === e.currentTarget) finish(); });
+      $$("[data-y]", root).forEach((b) => b.addEventListener("click", () => { dir = +b.dataset.y; year += dir; render(); }));
+      $$("[data-l]", root).forEach((b) => b.addEventListener("click", () => { b.classList.add("picked"); finish(); }));
+    }
+    render();
+  }
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") { const bd = $("#layer .mp-backdrop"); if (bd) bd.click(); } });
+
+  /* ---------- Toque longo + menu de ações (useLongPress + QuickActionsMenu) ---------- */
+  let press = null;
+  function openMenu(x, y) {
+    const root = document.createElement("div");
+    root.innerHTML = '<div class="overlay"></div><div role="menu" class="quick-menu">' +
+      '<button type="button" role="menuitem" class="quick-menu-item"><i data-lucide="pencil"></i>Editar</button>' +
+      '<button type="button" role="menuitem" class="quick-menu-item"><i data-lucide="landmark"></i>Mover pra conta</button>' +
+      '<button type="button" role="menuitem" class="quick-menu-item danger"><i data-lucide="trash-2"></i>Excluir</button></div>';
+    layer.appendChild(root);
+    icons();
+    const m = $(".quick-menu", root), margin = 8, w = m.offsetWidth, h = m.offsetHeight;
+    let left = x - w / 2, top = y, flipped = false;
+    if (left < margin) left = margin;
+    if (left + w > innerWidth - margin) left = innerWidth - margin - w;
+    if (top + h > innerHeight - margin) { top = y - h; flipped = true; }
+    if (top < margin) top = margin;
+    m.style.left = left + "px"; m.style.top = top + "px";
+    m.style.transformOrigin = flipped ? "bottom center" : "top center";
+    requestAnimationFrame(() => m.classList.add("ready"));
+    const close = () => root.remove();
+    $(".overlay", root).addEventListener("click", close);
+    $$(".quick-menu-item", root).forEach((b) => b.addEventListener("click", () => { if (b.classList.contains("danger")) DIALOGS.confirm(); close(); }));
+    m.addEventListener("contextmenu", (e) => e.preventDefault());
+  }
+  $$("[data-press]").forEach((card) => {
+    const clear = () => { if (press) clearTimeout(press.timer); press = null; card.classList.remove("pressing"); };
+    card.addEventListener("pointerdown", (e) => {
+      if (e.pointerType === "mouse" && e.button !== 0) return;
+      if (e.target.closest(".switch, .money-mask")) return;
+      const x = e.clientX, y = e.clientY;
+      press = { x, y, timer: setTimeout(() => { press = null; card.classList.remove("pressing"); openMenu(x, y); }, 300) };
+      card.classList.add("pressing");
+    });
+    card.addEventListener("pointermove", (e) => { if (press && Math.hypot(e.clientX - press.x, e.clientY - press.y) > 10) clear(); });
+    ["pointerup", "pointercancel", "pointerleave"].forEach((t) => card.addEventListener(t, clear));
+    card.addEventListener("contextmenu", (e) => { e.preventDefault(); clear(); openMenu(e.clientX, e.clientY); });
+  });
+
+  /* ---------- Início ---------- */
+  let start = "esmeralda";
+  try {
+    const last = localStorage.getItem("modernista:palette");
+    const opts = Object.keys(PALETTES).filter((p) => p !== last);
+    start = opts[Math.floor(Math.random() * opts.length)];
+  } catch (e) {}
+  icons();
+  setPalette(start);
+  jackpot($("#hero-value"), brl(1286.35), "up");
+  jackpot($("#stat-receita"), brl(5850), "up");
+  jackpot($("#stat-gasto"), brl(3563.65), "up");
+  gauge(52, true);
+})();
+</script>
+</body>
+</html>

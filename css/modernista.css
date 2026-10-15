@@ -1,0 +1,14 @@
+/* Modernista — ponto de entrada único.
+   Importa as fontes, o reset, os tokens e os componentes, nessa ordem.
+
+   Em projetos com Tailwind v4 não importe este arquivo depois do
+   `@import "tailwindcss"` (o @import de fontes precisa ser o primeiro da
+   folha). Nesse caso, carregue as fontes por <link> e importe só:
+     @import "modernista/css/tokens.css";
+     @import "modernista/css/components.css";
+   — o preflight do Tailwind já faz o papel do reset. */
+
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap");
+@import "./reset.css";
+@import "./tokens.css";
+@import "./components.css";
