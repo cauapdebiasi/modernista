@@ -36,7 +36,7 @@ docs/index.html    documentação com exemplos ao vivo
 
 ## Instalação
 
-O repositório é privado. Instale direto do GitHub:
+O repositório é público. Instale direto do GitHub:
 
 ```bash
 npm install github:cauapdebiasi/modernista
