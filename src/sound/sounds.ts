@@ -1,3 +1,5 @@
+"use client";
+
 // Feedback sonoro do app. Os sons são sintetizados na hora (Web Audio), sem
 // arquivos. Cada ação tem um som só: sucesso, erro, aviso e clique.
 

@@ -8,7 +8,8 @@
 //     <script dangerouslySetInnerHTML={{ __html: paletteInitScript() }} />
 //     ...
 // e `suppressHydrationWarning` no <html>, já que os atributos mudam antes
-// do React hidratar.
+// do React hidratar. Importe de "modernista/init" (sem "use client"), não do
+// índice, pra o Server Component não puxar código de cliente.
 
 export const PALETTES = ["esmeralda", "oceano", "turquesa"] as const;
 export type Palette = (typeof PALETTES)[number];
@@ -34,6 +35,15 @@ export function paletteInitScript(fixed?: Palette): string {
   const colors = JSON.stringify(PALETTE_THEME_COLOR);
   const key = JSON.stringify(PALETTE_STORAGE_KEY);
   return `try{var L=${list},C=${colors},last=null;try{last=localStorage.getItem(${key})}catch(e){}var o=L.filter(function(x){return x!==last}),p=o[Math.floor(Math.random()*o.length)];try{localStorage.setItem(${key},p)}catch(e){}document.documentElement.setAttribute('data-palette',p);var m=document.querySelector('meta[name=theme-color]');if(m)m.setAttribute('content',C[p])}catch(e){}`;
+}
+
+/** Copia o valor de chaves antigas do localStorage pras novas, só quando a
+ *  nova ainda não existe (a antiga fica onde está). Serve pra quem já usava o
+ *  app antes dos nomes `modernista:*`. Rode ANTES dos outros scripts de início.
+ *  Ex.: migrateStorageKeysScript({ "pf-palette": PALETTE_STORAGE_KEY }). */
+export function migrateStorageKeysScript(map: Record<string, string>): string {
+  const m = JSON.stringify(map);
+  return `try{var M=${m};for(var o in M){try{var v=localStorage.getItem(o);if(v!==null&&localStorage.getItem(M[o])===null)localStorage.setItem(M[o],v)}catch(e){}}}catch(e){}`;
 }
 
 /** Lê a preferência "ocultar valores" e marca <html data-hide-money="1">,

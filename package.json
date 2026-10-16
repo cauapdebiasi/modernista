@@ -9,6 +9,7 @@
   "types": "./src/index.ts",
   "exports": {
     ".": "./src/index.ts",
+    "./init": "./src/scripts/init.ts",
     "./css/*": "./css/*",
     "./tokens.json": "./tokens/tokens.json",
     "./assets/*": "./assets/*"

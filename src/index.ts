@@ -60,6 +60,7 @@ export {
   HIDE_MONEY_STORAGE_KEY,
   HIDE_MONEY_INIT_SCRIPT,
   paletteInitScript,
+  migrateStorageKeysScript,
   setPalette,
   setHideMoney,
   type Palette,

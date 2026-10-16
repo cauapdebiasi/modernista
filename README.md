@@ -72,7 +72,8 @@ Os ícones de cartão referenciam `../assets/cards/*.svg` a partir do CSS. Se o 
 
 ```tsx
 import { Toaster } from "sonner";
-import { HIDE_MONEY_INIT_SCRIPT, paletteInitScript, SoundEffects } from "modernista";
+import { HIDE_MONEY_INIT_SCRIPT, paletteInitScript } from "modernista/init";
+import { SoundEffects } from "modernista";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -90,6 +91,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 ```
 
 `paletteInitScript()` sorteia uma paleta sem repetir a anterior. Use `paletteInitScript("oceano")` pra fixar uma.
+
+Importe os scripts de `modernista/init`, que não é client, e não do índice. O pacote publica TypeScript sem build, então no Next.js liste-o em `next.config.ts`: `transpilePackages: ["modernista"]`.
+
+Se o app já guardava preferências com outros nomes de chave, `migrateStorageKeysScript({ "pf-sound": "modernista:sound", "pf-hide-money": "modernista:hide-money", "pf-palette": "modernista:palette" })` devolve um script que copia cada valor antigo pra chave nova, só quando a nova ainda não existe. Coloque-o antes dos outros scripts de início.
 
 ## Tokens
 
